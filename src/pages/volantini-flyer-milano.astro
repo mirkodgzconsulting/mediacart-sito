@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+import LandingBreadcrumb from "../components/LandingBreadcrumb.astro";
+---
+
+<Base
+  title="Volantini e Flyer Milano Biccoca | Stampa MEDIA Cart"
+  description="Stampa volantini, flyer e locandine a Milano. Tipografia in Viale Sarca 163: pieghevoli, depliant, materiali promozionali. Preventivo in negozio."
+  path="/volantini-flyer-milano"
+>
+  <LandingBreadcrumb
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Servizi", href: "/servizi" },
+      { label: "Volantini e flyer Milano" }
+    ]}
+  />
+
+  <section class="section landing-hero">
+    <div class="container">
+      <h1>Volantini e flyer a Milano</h1>
+      <p class="lead">
+        <strong>Volantini e flyer</strong> sono ancora uno dei modi piu diretti per promuovere un evento, un&apos;apertura o
+        un&apos;offerta in zona. MEDIA Cart stampa in <strong>piccolo e medio formato</strong> con carte e gramature adatte
+        all&apos;uso (distribuzione in strada, volantinaggio, esposizione in vetrina). Siamo in <strong>Viale Sarca 163</strong>,
+        comodi per chi lavora o vive in area Biccoca e dintorni.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container card">
+      <h2>Cosa possiamo stampare</h2>
+      <ul class="landing-list">
+        <li>Flyer formato A5, A6, DL o misure personalizzate</li>
+        <li>Volantini su carte patinate o usomano, a seconda del budget e del look desiderato</li>
+        <li>Locandine per affissioni interne o comunicazione locale</li>
+        <li>Pieghevoli, brochure e depliant con piega a portafoglio o ad accordion</li>
+      </ul>
+      <p>
+        La resa del colore dipende da file e macchina: ti indichiamo come preparare il PDF o, se preferisci, valutiamo il
+        file che hai gia per evitare sorprese in stampa.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container card">
+      <h2>Campagne locali e attivita commerciali</h2>
+      <p>
+        Ristoranti, negozi, associazioni e campagne elettorali a <strong>Milano</strong> spesso combinano volantini con altri
+        materiali (poster, manifesti). Dal nostro <a href="/servizi">catalogo servizi</a> puoi ordinare tutto con un unico
+        interlocutore e ritirare in negozio, coordinando tempi e quantita.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <h2>Preventivo volantini e flyer</h2>
+      <p class="lead">
+        Indica formato, numero di pieghe (se presenti), quantita e grammatura desiderata. Per tirature piu alte, chiedi
+        sempre un preventivo: spesso conviene definire carta e finitura insieme.
+      </p>
+      <p class="landing-actions">
+        <a class="btn btn-primary" href="/contatti">Richiedi preventivo</a>
+        <a class="btn btn-outline" href="https://wa.me/393515544449" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+      <p class="muted landing-more">
+        Sezione dedicata: <a href="/servizi#piccolo-formato">piccolo formato</a>.
+      </p>
+    </div>
+  </section>
+</Base>

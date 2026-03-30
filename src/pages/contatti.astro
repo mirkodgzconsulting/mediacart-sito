@@ -1,0 +1,196 @@
+---
+import Base from "../layouts/Base.astro";
+import Phone from "@lucide/astro/icons/phone";
+import Clock from "@lucide/astro/icons/clock";
+import MapPin from "@lucide/astro/icons/map-pin";
+---
+
+<Base
+  title="Contatti | MEDIA Cart Viale Sarca 163 Milano"
+  description="Contatta MEDIA Cart a Milano Biccoca per un preventivo di stampa: WhatsApp, telefono o email. Siamo in Viale Sarca 163."
+  path="/contatti"
+>
+  <section class="section">
+    <div class="container">
+      <h1>Contatti</h1>
+      <p class="lead">
+        Per tempi e prezzi, <strong>chiedi preventivo</strong> su WhatsApp o telefono.
+        Ti rispondiamo rapidamente e confermiamo lavorazione e ritiro in negozio.
+      </p>
+
+      <div class="grid-3 contatti-values">
+        <article class="card contatti-value-card">
+          <span class="contatti-icon-wrap" aria-hidden="true">
+            <Phone size={28} stroke-width={1.75} class="contatti-lucide lucide" />
+          </span>
+          <h2>Contatti rapidi</h2>
+          <div class="contatti-card-body">
+            <p><a href="https://wa.me/393515544449" target="_blank" rel="noopener noreferrer">WhatsApp: +39 351 554 4449</a></p>
+            <p><a href="tel:+393515544449">Telefono: +39 351 554 4449</a></p>
+            <p><a href="tel:0240025540">Telefono: 02 4002 5540</a></p>
+            <p><a href="mailto:info@centrostampa.srl">info@centrostampa.srl</a></p>
+          </div>
+        </article>
+
+        <article class="card contatti-value-card">
+          <span class="contatti-icon-wrap" aria-hidden="true">
+            <Clock size={28} stroke-width={1.75} class="contatti-lucide lucide" />
+          </span>
+          <h2>Orari negozio</h2>
+          <div class="contatti-card-body">
+            <p>Lunedì–Venerdì: 09:00–13:00 / 14:00–19:00</p>
+            <p>Sabato: 09:00–13:00 / 14:00–19:00</p>
+            <p>Domenica: Chiuso</p>
+            <p class="muted">Copertura servizio: solo negozio fisico a Milano.</p>
+          </div>
+        </article>
+
+        <article class="card contatti-value-card">
+          <span class="contatti-icon-wrap" aria-hidden="true">
+            <MapPin size={28} stroke-width={1.75} class="contatti-lucide lucide" />
+          </span>
+          <h2>Indirizzo</h2>
+          <div class="contatti-card-body">
+            <p>Viale Sarca, 163, 20126 Milano MI</p>
+            <p><a href="https://maps.app.goo.gl/7gMguGpeDLa3ozq37" target="_blank" rel="noopener noreferrer">Apri su Google Maps</a></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dove-section" aria-labelledby="contatti-mappa-heading">
+    <div class="container dove-wrap cta-band">
+      <div class="dove-grid">
+        <div class="dove-copy">
+          <h2 id="contatti-mappa-heading">Dove siamo</h2>
+          <p class="lead dove-lead">
+            Siamo in <strong>Viale Sarca 163, 20126 Milano MI</strong>, in zona Biccoca.
+            Servizio locale in negozio, con assistenza diretta.
+          </p>
+          <p class="dove-actions">
+            <a class="btn btn-outline" href="https://maps.app.goo.gl/7gMguGpeDLa3ozq37" target="_blank" rel="noopener noreferrer">
+              Apri su Google Maps
+            </a>
+          </p>
+        </div>
+        <div class="dove-map">
+          <iframe
+            title="Mappa: MEDIA Cart, Viale Sarca 163, Milano"
+            src="https://www.google.com/maps?q=Viale+Sarca+163,+20126+Milano+MI&output=embed"
+            width="600"
+            height="450"
+            style="border:0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .dove-wrap {
+    padding: clamp(20px, 3vw, 28px);
+  }
+  .dove-grid {
+    display: flex;
+    gap: clamp(20px, 3vw, 36px);
+    align-items: stretch;
+  }
+  .dove-copy {
+    flex: 0 0 43%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: clamp(16px, 2.2vw, 24px);
+    min-height: 0;
+  }
+  .dove-map {
+    flex: 1 1 57%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    min-height: 260px;
+  }
+  .dove-copy h2 {
+    margin: 0;
+  }
+  .dove-lead {
+    margin: 0 !important;
+  }
+  .dove-actions {
+    margin: 0;
+  }
+  .dove-map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 270px;
+  }
+  @media (max-width: 900px) {
+    .dove-grid {
+      flex-direction: column;
+    }
+    .dove-copy {
+      justify-content: flex-start;
+      gap: 18px;
+    }
+    .dove-map iframe {
+      min-height: 240px;
+    }
+  }
+
+  .contatti-value-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .contatti-value-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  }
+  .contatti-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0, 174, 239, 0.14), rgba(236, 0, 140, 0.1));
+    color: var(--color-primary);
+  }
+  .contatti-icon-wrap :global(svg) {
+    display: block;
+  }
+  .contatti-value-card h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.2rem);
+  }
+  .contatti-card-body {
+    width: 100%;
+  }
+  .contatti-card-body p {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .contatti-card-body p:last-child {
+    margin-bottom: 0;
+  }
+  .contatti-card-body a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .contatti-card-body a:hover {
+    text-decoration: underline;
+  }
+</style>

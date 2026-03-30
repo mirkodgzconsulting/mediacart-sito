@@ -1,0 +1,348 @@
+---
+/**
+ * Carrusel hero: placeholder finché non passi `slides` con `src` + `alt`.
+ * Esempio:
+ * slides={[
+ *   { src: "/images/hero/stampa-tesi.jpg", alt: "Stampa tesi" },
+ *   { src: "/images/hero/grande-formato.jpg", alt: "Grande formato" },
+ * ]}
+ */
+export interface HeroSlide {
+  src?: string;
+  alt?: string;
+  /** Testo sul placeholder (opzionale) */
+  label?: string;
+}
+
+interface Props {
+  slides?: HeroSlide[];
+}
+
+const DEFAULT_COUNT = 5;
+
+const { slides: slidesProp } = Astro.props;
+
+const slides: HeroSlide[] =
+  slidesProp && slidesProp.length > 0
+    ? slidesProp
+    : Array.from({ length: DEFAULT_COUNT }, (_, i) => ({
+        label: `Servizio ${i + 1}`,
+      }));
+---
+
+<div class="hero-service-carousel" data-hero-carousel>
+  <div class="carousel-shell">
+    <div
+      class="carousel-track"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Anteprima servizi in negozio"
+      tabindex="0"
+      data-carousel-track
+    >
+      {
+        slides.map((slide, i) => (
+          <div class="carousel-slide" data-carousel-slide aria-hidden={i === 0 ? "false" : "true"}>
+            <figure class="carousel-figure">
+              {slide.src ? (
+                <img
+                  class="carousel-img"
+                  src={slide.src}
+                  alt={slide.alt ?? ""}
+                  draggable="false"
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchpriority={i === 0 ? "high" : undefined}
+                />
+              ) : (
+                <div class="carousel-placeholder">
+                  <span class="carousel-ph-num" aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <span class="carousel-ph-text">
+                    {slide.label ?? `Immagine ${i + 1}`}
+                    <span class="carousel-ph-hint">Sostituisci con foto reale (vedi commento in index.astro)</span>
+                  </span>
+                </div>
+              )}
+            </figure>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="carousel-dots" role="tablist" aria-label="Seleziona slide" data-carousel-dots>
+    {
+      slides.map((_, i) => (
+        <button
+          type="button"
+          role="tab"
+          class:list={["carousel-dot", { "is-active": i === 0 }]}
+          aria-selected={i === 0 ? "true" : "false"}
+          aria-label={`Vai alla slide ${i + 1}`}
+          data-carousel-dot={i}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  (function () {
+    const root = document.querySelector("[data-hero-carousel]");
+    if (!root) return;
+
+    const trackEl = root.querySelector("[data-carousel-track]");
+    const slideEls = root.querySelectorAll("[data-carousel-slide]");
+    const dots = root.querySelectorAll("[data-carousel-dot]");
+    if (!slideEls.length) return;
+    if (!(trackEl instanceof HTMLElement)) return;
+    const track = trackEl;
+
+    let index = 0;
+    const len = slideEls.length;
+
+    function norm(i) {
+      return ((i % len) + len) % len;
+    }
+
+    function setActive(i) {
+      index = norm(i);
+      slideEls.forEach((el, j) => {
+        el.setAttribute("aria-hidden", j === index ? "false" : "true");
+      });
+      dots.forEach((d, j) => {
+        d.classList.toggle("is-active", j === index);
+        d.setAttribute("aria-selected", j === index ? "true" : "false");
+      });
+    }
+
+    function scrollToIndex(i) {
+      const idx = norm(i);
+      slideEls[idx]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      setActive(idx);
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const i = Number(dot.getAttribute("data-carousel-dot"));
+        if (!Number.isNaN(i)) scrollToIndex(i);
+      });
+    });
+
+    track.addEventListener("keydown", (e) => {
+      if (!(e instanceof KeyboardEvent)) return;
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        scrollToIndex(index - 1);
+      }
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        scrollToIndex(index + 1);
+      }
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const en of entries) {
+          if (!en.isIntersecting) continue;
+          const i = Array.from(slideEls).indexOf(en.target);
+          if (i >= 0) setActive(i);
+        }
+      },
+      { root: track, threshold: 0.55 }
+    );
+
+    slideEls.forEach((s) => io.observe(s));
+
+    /** Rueda del ratón / trackpad → scroll horizontal */
+    track.addEventListener(
+      "wheel",
+      (e) => {
+        if (!(e instanceof WheelEvent)) return;
+        const absY = Math.abs(e.deltaY);
+        const absX = Math.abs(e.deltaX);
+        if (absX > absY && absX > 0) {
+          e.preventDefault();
+          track.scrollLeft += e.deltaX;
+          return;
+        }
+        if (absY > absX && absY > 0) {
+          e.preventDefault();
+          track.scrollLeft += e.deltaY;
+        }
+      },
+      { passive: false }
+    );
+
+    /** Arrastre con mouse / táctil para desplazar */
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+    let dragging = false;
+    let dragPointerId = -1;
+
+    track.addEventListener("pointerdown", (e) => {
+      if (!(e instanceof PointerEvent) || e.button !== 0) return;
+      dragging = true;
+      dragPointerId = e.pointerId;
+      dragStartX = e.clientX;
+      dragStartScroll = track.scrollLeft;
+      track.style.scrollBehavior = "auto";
+      try {
+        track.setPointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+    });
+
+    track.addEventListener("pointermove", (e) => {
+      if (!dragging || !(e instanceof PointerEvent)) return;
+      track.scrollLeft = dragStartScroll - (e.clientX - dragStartX);
+    });
+
+    function endDrag(e) {
+      if (!(e instanceof PointerEvent)) return;
+      if (!dragging || e.pointerId !== dragPointerId) return;
+      dragging = false;
+      dragPointerId = -1;
+      track.style.scrollBehavior = "";
+      try {
+        track.releasePointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+    }
+
+    track.addEventListener("pointerup", endDrag);
+    track.addEventListener("pointercancel", endDrag);
+  })();
+</script>
+
+<style>
+  .hero-service-carousel {
+    margin-bottom: 0.7rem;
+  }
+  .carousel-shell {
+    position: relative;
+    display: block;
+    width: 100%;
+    /* Un solo alto para todas le slide: evita spazio bianco sotto la 1ª e bande sulle altre */
+    aspect-ratio: 4 / 3;
+  }
+  .carousel-track {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    min-height: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0;
+    border-radius: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    outline: none;
+    cursor: grab;
+    touch-action: pan-x pinch-zoom;
+  }
+  .carousel-track:active {
+    cursor: grabbing;
+  }
+  .carousel-track:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-primary);
+  }
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-slide {
+    flex: 0 0 100%;
+    align-self: stretch;
+    height: 100%;
+    min-height: 0;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    min-width: 0;
+  }
+  .carousel-figure {
+    margin: 0;
+    position: relative;
+    height: 100%;
+    min-height: 0;
+    border-radius: 0;
+    overflow: hidden;
+    border: none;
+    background: var(--color-surface);
+  }
+  .carousel-img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    vertical-align: middle;
+  }
+  .carousel-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    background: linear-gradient(
+      155deg,
+      color-mix(in srgb, var(--color-primary) 8%, var(--color-surface)) 0%,
+      color-mix(in srgb, var(--color-secondary) 6%, var(--color-surface)) 100%
+    );
+    border: 2px dashed color-mix(in srgb, var(--color-border) 70%, var(--color-muted));
+  }
+  .carousel-ph-num {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1;
+    color: color-mix(in srgb, var(--color-primary) 45%, var(--color-muted));
+    opacity: 0.85;
+  }
+  .carousel-ph-text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--color-muted);
+    max-width: 16rem;
+  }
+  .carousel-ph-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    opacity: 0.88;
+  }
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0;
+    padding: 12px 16px 16px;
+  }
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-border);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .carousel-dot.is-active {
+    background: var(--color-primary);
+    transform: scale(1.15);
+  }
+  .carousel-dot:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+</style>

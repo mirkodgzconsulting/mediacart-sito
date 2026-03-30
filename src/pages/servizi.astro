@@ -1,0 +1,266 @@
+---
+import Base from "../layouts/Base.astro";
+import ServizioCard from "../components/ServizioCard.astro";
+import ServizioLucideIcon from "../components/ServizioLucideIcon.astro";
+import { catalogoServizi } from "../data/catalogo-servizi";
+import { landingPages } from "../data/landing-links";
+import { serviziEvidenza } from "../data/servizi-evidenza";
+---
+
+<Base
+  title="Servizi di Stampa Milano Biccoca | Catalogo MEDIA Cart"
+  description="Catalogo completo: piccolo e grande formato, tesi di laurea, packaging, gadget, foto, espositori e molto altro. Tipografia e cartoleria a Milano, Viale Sarca 163."
+  path="/servizi"
+>
+  <section class="section servizi-hero">
+    <div class="container">
+      <h1>Servizi di stampa e tipografia a Milano Biccoca</h1>
+      <p class="lead">
+        MEDIA Cart e il punto di riferimento in negozio per studenti, professionisti e aziende. Qui trovi un catalogo
+        organizzato per categorie: ogni voce puo essere realizzata su preventivo, con consiglio su file, supporti e tempi.
+        <strong>Ritiro in sede a Milano</strong> (Viale Sarca 163).
+      </p>
+      <div class="servizi-landing-box card">
+        <h2 class="servizi-landing-title">Guide sui servizi piu cercati</h2>
+        <p class="muted servizi-landing-lead">
+          Pagine dedicate con testi approfonditi per chi cerca su Google servizi specifici a Milano Biccoca.
+        </p>
+        <ul class="servizi-landing-links">
+          {landingPages.map((p) => (
+            <li>
+              <a href={p.href}>{p.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="servizi-evidenza-heading">
+    <div class="container">
+      <h2 id="servizi-evidenza-heading">Servizi in evidenza</h2>
+      <p class="lead">
+        Soluzioni di stampa e cartoleria con attenzione a qualita, puntualita e supporto cliente.
+      </p>
+      <div class="grid-3">
+        {serviziEvidenza.map((servizio) => (
+          <ServizioCard
+            titolo={servizio.titolo}
+            descrizione={servizio.descrizione}
+            href={servizio.href}
+            immagineSrc={servizio.immagineSrc}
+            immagineAlt={servizio.immagineAlt}
+            immagineObjectFit="contain"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="stampa-tesi">
+    <div class="container cta-band">
+      <h2>Stampa tesi di laurea Milano Biccoca</h2>
+      <p class="lead">
+        Se cerchi dove stampare la tesi vicino all&apos;Universita Biccoca, MEDIA Cart offre un servizio dedicato con
+        controllo file, opzioni di rilegatura e assistenza rapida. Ti aiutiamo a scegliere la soluzione piu adatta
+        tra spirale, cartonata e brossura, con finiture curate e consegna in negozio.
+      </p>
+      <p class="lead">
+        Il servizio e pensato per studenti con tempi stretti che vogliono un interlocutore affidabile a Milano:
+        contattaci con i dettagli del progetto e ricevi un preventivo chiaro.
+      </p>
+      <a class="btn btn-primary" href="/contatti">Richiedi preventivo tesi</a>
+    </div>
+  </section>
+
+  <section class="section servizi-toc" aria-labelledby="toc-heading">
+    <div class="container">
+      <h2 id="toc-heading">Catalogo servizi per categoria</h2>
+      <p class="lead">Salta alla sezione che ti interessa: struttura pensata per chi cerca su Google prodotti specifici.</p>
+      <nav class="toc-nav" aria-label="Indice catalogo servizi">
+        <ul>
+          {catalogoServizi.map((cat) => (
+            <li>
+              <a href={`#${cat.id}`}>
+                <span class="toc-icon-wrap" aria-hidden="true">
+                  <ServizioLucideIcon categoryId={cat.id} size={20} />
+                </span>
+                {cat.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  {catalogoServizi.map((cat) => (
+    <section class="section catalog-block" id={cat.id} aria-labelledby={`heading-${cat.id}`}>
+      <div class="container card catalog-card">
+        <h2 id={`heading-${cat.id}`}>
+          <span class="catalog-heading-icon" aria-hidden="true">
+            <ServizioLucideIcon categoryId={cat.id} size={26} />
+          </span>
+          {cat.title}
+        </h2>
+        <p class="catalog-intro">{cat.intro}</p>
+        <ul class="catalog-list">
+          {cat.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="catalog-cta muted">
+          Per questa categoria: <a href="/contatti">chiedi preventivo</a> o scrivici su WhatsApp con tipo di prodotto e quantita.
+        </p>
+      </div>
+    </section>
+  ))}
+
+  <section class="section">
+    <div class="container cta-band catalog-footer-cta">
+      <h2>Servizio grafico e file</h2>
+      <p class="lead">
+        Non sei sicuro del formato o della resa? Il team puo supportarti su impaginazione, preparazione file e scelta del
+        supporto piu adatto al tuo obiettivo.
+      </p>
+      <a class="btn btn-primary" href="/contatti">Contattaci</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .servizi-hero {
+    padding-top: 48px;
+  }
+  .servizi-landing-box {
+    margin-top: 28px;
+    padding: 22px;
+  }
+  .servizi-landing-title {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+  }
+  @media (min-width: 901px) {
+    .servizi-landing-title {
+      font-size: 27px;
+    }
+  }
+  .servizi-landing-lead {
+    margin: 0 0 14px;
+    font-size: 0.95rem;
+  }
+  .servizi-landing-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 20px;
+  }
+  .servizi-landing-links a {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .servizi-landing-links a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 700px) {
+    .servizi-landing-links {
+      grid-template-columns: 1fr;
+    }
+  }
+  .toc-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 20px;
+  }
+  @media (min-width: 900px) {
+    .toc-nav ul {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .toc-nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .toc-nav a:hover {
+    background: #f0f7ff;
+    border-color: var(--color-primary);
+  }
+  .toc-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    margin-right: 2px;
+  }
+  .toc-icon-wrap :global(svg) {
+    display: block;
+  }
+  .catalog-block {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .catalog-card h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.65rem);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  @media (min-width: 901px) {
+    .catalog-card h2 {
+      font-size: 27px;
+    }
+  }
+  .catalog-heading-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .catalog-heading-icon :global(svg) {
+    display: block;
+  }
+  .catalog-intro {
+    margin: 0 0 16px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 75ch;
+  }
+  .catalog-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .catalog-list li {
+    margin-bottom: 6px;
+  }
+  .catalog-cta {
+    margin: 20px 0 0;
+    font-size: 0.95rem;
+  }
+  .catalog-footer-cta {
+    text-align: left;
+  }
+  @media (max-width: 900px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+    }
+    .toc-nav ul {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

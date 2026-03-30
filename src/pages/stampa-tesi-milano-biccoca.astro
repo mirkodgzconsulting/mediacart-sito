@@ -1,0 +1,79 @@
+---
+import Base from "../layouts/Base.astro";
+import LandingBreadcrumb from "../components/LandingBreadcrumb.astro";
+---
+
+<Base
+  title="Stampa Tesi di Laurea Milano Biccoca | MEDIA Cart"
+  description="Stampa e rilegatura tesi vicino Universita Biccoca: spirale, brossura, copertina. Preventivo rapido, ritiro in negozio a Viale Sarca 163, Milano."
+  path="/stampa-tesi-milano-biccoca"
+>
+  <LandingBreadcrumb
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Servizi", href: "/servizi" },
+      { label: "Stampa tesi Milano Biccoca" }
+    ]}
+  />
+
+  <section class="section landing-hero">
+    <div class="container">
+      <h1>Stampa tesi di laurea a Milano Biccoca</h1>
+      <p class="lead">
+        Se studi all&apos;Universita di Milano-Biccoca o nei dintorni e ti serve una <strong>copisteria affidabile</strong> per
+        stampare e rilegare la tesi, MEDIA Cart e in negozio in <strong>Viale Sarca 163</strong>. Lavoriamo su preventivo,
+        verifichiamo file e supporti e ti accompagniamo nella scelta della rilegatura piu adatta al regolamento del tuo corso.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container card">
+      <h2>Cosa offriamo per la tesi</h2>
+      <ul class="landing-list">
+        <li>Stampa fronte/retro su carta selezionabile in base al regolamento</li>
+        <li>Rilegatura a spirale (anche metallica o nobilitata dove richiesto)</li>
+        <li>Brossura, cuciture e soluzioni per volumi piu articolati</li>
+        <li>Copertine e finiture curate, anche per consegne ravvicinate alla discussione</li>
+        <li>Controllo preliminare su impaginazione e margini quando possibile</li>
+      </ul>
+      <p>
+        Ogni ateneo ha regole diverse: portaci il regolamento o scrivici su WhatsApp con le specifiche cosi prepariamo un
+        preventivo chiaro su tempi e costi, senza sorprese.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container card">
+      <h2>Perche scegliere MEDIA Cart per la tesi</h2>
+      <p>
+        Siamo una <strong>tipografia e cartoleria digitale</strong> con servizio in negozio: niente spedizioni incerte per
+        l&apos;ultimo giorno. La clientela universitaria ci sceglie per puntualita, cortesia e precisione, come confermano le
+        recensioni su Google.
+      </p>
+      <p>
+        Il ritiro e sempre <strong>in sede a Milano</strong>: cosi controlli il risultato prima della laurea e, se serve,
+        possiamo valutare piccole correzioni insieme.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <h2>Richiedi preventivo tesi</h2>
+      <p class="lead">
+        Indica numero di pagine, formato (A4 o altro), tipo di rilegatura richiesta e data utile. Ti rispondiamo su
+        telefono o WhatsApp.
+      </p>
+      <p class="landing-actions">
+        <a class="btn btn-primary" href="/contatti">Contatti e preventivo</a>
+        <a class="btn btn-outline" href="https://wa.me/393515544449" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+      <p class="muted landing-more">
+        Vedi anche il <a href="/servizi#stampa-tesi">catalogo servizi — sezione tesi</a> e
+        <a href="/servizi#riviste-libri-cataloghi">riviste, libri e cataloghi</a>.
+      </p>
+    </div>
+  </section>
+</Base>

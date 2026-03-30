@@ -1,0 +1,93 @@
+---
+import Base from "../layouts/Base.astro";
+import BadgeCheck from "@lucide/astro/icons/badge-check";
+import Zap from "@lucide/astro/icons/zap";
+import HeartHandshake from "@lucide/astro/icons/heart-handshake";
+---
+
+<Base
+  title="Chi Siamo | MEDIA Cart Tipografia Milano Bicocca"
+  description="Scopri MEDIA Cart: team professionale e cordiale in zona Bicocca, specializzato in stampa tesi, tipografia digitale e supporto grafico."
+  path="/chi-siamo"
+>
+  <section class="section">
+    <div class="container">
+      <h1>Chi siamo</h1>
+      <p class="lead">
+        MEDIA Cart e il punto di riferimento in zona Bicocca per chi cerca una cartoleria e tipografia
+        digitale affidabile, con assistenza reale in negozio e attenzione concreta alle esigenze del cliente.
+      </p>
+      <div class="grid-3 chi-values">
+        <article class="card chi-value-card">
+          <span class="chi-icon-wrap" aria-hidden="true">
+            <BadgeCheck size={28} stroke-width={1.75} class="chi-lucide lucide" />
+          </span>
+          <h2>Professionalità</h2>
+          <p class="muted">
+            Ogni lavorazione viene gestita con controllo tecnico e cura dei dettagli, dal file al prodotto finale.
+          </p>
+        </article>
+        <article class="card chi-value-card">
+          <span class="chi-icon-wrap" aria-hidden="true">
+            <Zap size={28} stroke-width={1.75} class="chi-lucide lucide" />
+          </span>
+          <h2>Rapidità</h2>
+          <p class="muted">
+            Organizziamo il lavoro per offrire tempi rapidi e chiari, soprattutto per urgenze universitarie e aziendali.
+          </p>
+        </article>
+        <article class="card chi-value-card">
+          <span class="chi-icon-wrap" aria-hidden="true">
+            <HeartHandshake size={28} stroke-width={1.75} class="chi-lucide lucide" />
+          </span>
+          <h2>Approccio umano</h2>
+          <p class="muted">
+            Le recensioni confermano cortesia, disponibilità e supporto: il cliente viene seguito in ogni fase.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <h2>La nostra missione</h2>
+      <p class="lead">
+        Aiutare studenti, professionisti e aziende a stampare meglio, con processi semplici e risultati coerenti
+        con obiettivi, budget e tempi condivisi.
+      </p>
+      <a class="btn btn-primary" href="/contatti">Contattaci ora</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .chi-value-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .chi-value-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  }
+  .chi-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0, 174, 239, 0.14), rgba(236, 0, 140, 0.1));
+    color: var(--color-primary);
+  }
+  .chi-icon-wrap :global(svg) {
+    display: block;
+  }
+  .chi-value-card h2 {
+    margin: 0 0 10px;
+    font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.2rem);
+  }
+</style>

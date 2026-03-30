@@ -1,0 +1,105 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Pagina non trovata | MEDIA Cart"
+  description="La pagina che cerchi non esiste o è stata spostata. Torna alla home MEDIA Cart o contattaci a Milano Bicocca."
+  path="/404"
+  noindex
+>
+  <section class="not-found" aria-labelledby="not-found-heading">
+    <div class="container not-found-inner">
+      <p class="not-found-code" aria-hidden="true">404</p>
+      <img
+        class="not-found-logo"
+        src="/images/LOGO-MEDIA-cart-DEF.svg"
+        alt=""
+        width="200"
+        height="54"
+        loading="eager"
+        decoding="async"
+      />
+      <h1 id="not-found-heading">Pagina non trovata</h1>
+      <p class="not-found-lead">
+        La pagina che stai cercando non esiste, è stata rimossa o l&apos;indirizzo non è corretto.
+      </p>
+      <p class="not-found-muted">
+        MEDIA Cart — tipografia e cartoleria a <strong>Milano Bicocca</strong>, Viale Sarca 163.
+      </p>
+      <div class="not-found-actions">
+        <a class="btn btn-primary" href="/">Torna alla home</a>
+        <a class="btn btn-outline" href="/servizi">Vedi i servizi</a>
+        <a class="btn btn-outline" href="/contatti">Contatti</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-found {
+    position: relative;
+    padding: clamp(48px, 10vw, 100px) 0 clamp(64px, 12vw, 120px);
+    overflow: hidden;
+  }
+  .not-found::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 90% 70% at 50% -30%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 55%),
+      radial-gradient(ellipse 80% 60% at 100% 50%, color-mix(in srgb, var(--color-secondary) 10%, transparent), transparent 45%),
+      radial-gradient(ellipse 70% 50% at 0% 80%, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 50%);
+  }
+  .not-found-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 36rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .not-found-code {
+    margin: 0 0 8px;
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 18vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    background: linear-gradient(120deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.95;
+  }
+  .not-found-logo {
+    display: block;
+    margin: 0 auto 24px;
+    height: auto;
+    max-width: min(220px, 70vw);
+  }
+  .not-found h1 {
+    margin: 0 0 14px;
+    font-size: clamp(1.35rem, 1rem + 1.2vw, 1.65rem);
+    letter-spacing: -0.02em;
+  }
+  .not-found-lead {
+    margin: 0 0 12px;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-muted);
+  }
+  .not-found-muted {
+    margin: 0 0 28px;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+</style>

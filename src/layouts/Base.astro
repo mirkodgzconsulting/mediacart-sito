@@ -1,0 +1,143 @@
+---
+import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CTAStickyMobile from "../components/CTAStickyMobile.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  /** Pagina errore (404): noindex, senza canonical / JSON-LD */
+  noindex?: boolean;
+}
+
+const { title, description, path = "/", noindex = false } = Astro.props;
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://mediacart.it";
+const canonicalUrl = new URL(path, siteUrl + "/").toString();
+/** Immagine condivisione social (Open Graph / Twitter) */
+const ogImageUrl = new URL("/images/OG-MEDIACart-Share.webp", siteUrl + "/").toString();
+
+const mapsUrl = "https://maps.app.goo.gl/7gMguGpeDLa3ozq37";
+
+const structuredDataJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "MEDIA Cart",
+      inLanguage: "it-IT",
+      publisher: { "@id": `${siteUrl}/#business` },
+    },
+    {
+      "@type": ["PrintShop", "LocalBusiness"],
+      "@id": `${siteUrl}/#business`,
+      name: "MEDIA Cart",
+      description:
+        "Cartoleria e tipografia digitale a Milano, zona Bicocca. Stampa tesi, grande e piccolo formato, preventivo in negozio.",
+      url: siteUrl,
+      email: "info@centrostampa.srl",
+      telephone: ["+393515544449", "+390240025540"],
+      image: [ogImageUrl],
+      hasMap: mapsUrl,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Viale Sarca, 163",
+        addressLocality: "Milano",
+        postalCode: "20126",
+        addressRegion: "MI",
+        addressCountry: "IT",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 45.5134,
+        longitude: 9.214,
+      },
+      areaServed: {
+        "@type": "City",
+        name: "Milano",
+        containedInPlace: {
+          "@type": "AdministrativeArea",
+          name: "Lombardia",
+        },
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "363",
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "09:00",
+          closes: "13:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "14:00",
+          closes: "19:00",
+        },
+      ],
+      priceRange: "€€",
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ViewTransitions />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="robots"
+      content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"}
+    />
+    <meta name="author" content="MEDIA Cart" />
+    {
+      !noindex && (
+        <>
+          <meta name="geo.region" content="IT-MI" />
+          <meta name="geo.placename" content="Milano" />
+        </>
+      )
+    }
+    {!noindex && <link rel="canonical" href={canonicalUrl} />}
+    {!noindex && <link rel="alternate" hreflang="it-IT" href={canonicalUrl} />}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={canonicalUrl} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MEDIA Cart" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={noindex ? siteUrl + "/" : canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="MEDIA Cart — tipografia e cartoleria, Milano Bicocca" />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="theme-color" content="#00AEEF" />
+    <link rel="icon" type="image/jpeg" href="/images/favicon-mediacart.jpg" />
+    <link rel="apple-touch-icon" href="/images/favicon-mediacart.jpg" />
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(structuredDataJsonLd)} />}
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <CTAStickyMobile />
+  </body>
+</html>

@@ -1,0 +1,77 @@
+---
+interface Props {
+  titolo: string;
+  descrizione: string;
+  href?: string;
+  immagineSrc?: string;
+  immagineAlt?: string;
+  /** Default: cover (home). Usa "contain" per mostrare la foto intera senza ritagli. */
+  immagineObjectFit?: "cover" | "contain";
+}
+const { titolo, descrizione, href, immagineSrc, immagineAlt, immagineObjectFit = "cover" } = Astro.props;
+const isContain = immagineObjectFit === "contain";
+---
+
+<article class="card servizio-card">
+  {
+    immagineSrc && (
+      <div class:list={["servizio-card-visual", { "servizio-card-visual--contain": isContain }]}>
+        <img src={immagineSrc} alt={immagineAlt ?? titolo} width={640} height={400} loading="lazy" decoding="async" />
+      </div>
+    )
+  }
+  <div class="servizio-card-body">
+    {href ? (
+      <h3><a href={href}>{titolo}</a></h3>
+    ) : (
+      <h3>{titolo}</h3>
+    )}
+    <p class="muted">{descrizione}</p>
+    {href && <p class="card-more"><span>Vedi nel catalogo</span></p>}
+  </div>
+</article>
+
+<style>
+  .servizio-card {
+    padding: 0;
+    overflow: hidden;
+  }
+  .servizio-card-visual {
+    margin: 0;
+    border-bottom: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-border) 25%, var(--color-surface));
+  }
+  .servizio-card-visual img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: center;
+  }
+  .servizio-card-visual--contain img {
+    object-fit: contain;
+  }
+  .servizio-card-body {
+    padding: 20px;
+  }
+  .servizio-card h3 {
+    margin: 0 0 8px;
+  }
+  .servizio-card p {
+    margin: 0;
+    line-height: 1.6;
+  }
+  .servizio-card h3 a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .servizio-card h3 a:hover {
+    text-decoration: underline;
+  }
+  .card-more {
+    margin-top: 10px !important;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+  }
+</style>

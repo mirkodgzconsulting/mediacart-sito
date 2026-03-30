@@ -1,0 +1,47 @@
+---
+/**
+ * Icona Lucide per categoria catalogo /servizi.
+ * @see https://lucide.dev/icons/
+ */
+import FileText from "@lucide/astro/icons/file-text";
+import Newspaper from "@lucide/astro/icons/newspaper";
+import Tag from "@lucide/astro/icons/tag";
+import Image from "@lucide/astro/icons/image";
+import Flag from "@lucide/astro/icons/flag";
+import Presentation from "@lucide/astro/icons/presentation";
+import Package from "@lucide/astro/icons/package";
+import ShoppingBag from "@lucide/astro/icons/shopping-bag";
+import Camera from "@lucide/astro/icons/camera";
+import Gift from "@lucide/astro/icons/gift";
+import Calendar from "@lucide/astro/icons/calendar";
+import CreditCard from "@lucide/astro/icons/credit-card";
+import Building2 from "@lucide/astro/icons/building-2";
+
+const iconByCategoryId: Record<string, typeof FileText> = {
+  "piccolo-formato": FileText,
+  "riviste-libri-cataloghi": Newspaper,
+  "etichette-sticker": Tag,
+  "grande-formato-pannelli": Image,
+  "striscioni-tessuti": Flag,
+  "espositori-stand": Presentation,
+  packaging: Package,
+  "shopper-borse": ShoppingBag,
+  "stampa-foto": Camera,
+  "gadget-personalizzati": Gift,
+  "calendari-agende": Calendar,
+  "carte-tessere-pvc": CreditCard,
+  "settori-verticali": Building2
+};
+
+interface Props {
+  categoryId: string;
+  size?: number;
+  class?: string;
+}
+
+const { categoryId, size = 22, class: className } = Astro.props;
+const Cmp = iconByCategoryId[categoryId];
+const cls = ["servizio-lucide", className].filter(Boolean).join(" ");
+---
+
+{Cmp && <Cmp size={size} stroke-width={1.75} class={cls} aria-hidden="true" />}

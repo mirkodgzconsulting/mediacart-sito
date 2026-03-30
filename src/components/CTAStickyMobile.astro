@@ -1,0 +1,25 @@
+<div class="sticky-cta" aria-label="Contatti rapidi">
+  <a class="btn btn-primary" href="https://wa.me/393515544449" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+  <a class="btn btn-outline" href="tel:+393515544449">Chiama</a>
+</div>
+
+<style>
+  .sticky-cta {
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .sticky-cta {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      z-index: 30;
+    }
+    .sticky-cta .btn {
+      box-shadow: var(--shadow-soft);
+    }
+  }
+</style>

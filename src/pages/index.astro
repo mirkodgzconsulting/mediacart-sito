@@ -1,0 +1,384 @@
+---
+import Base from "../layouts/Base.astro";
+import ServizioCard from "../components/ServizioCard.astro";
+import HeroServiceCarousel from "../components/HeroServiceCarousel.astro";
+import { serviziEvidenza } from "../data/servizi-evidenza";
+
+const heroSlides = [
+  {
+    src: "/assets/Foto-Fronte-Negozio-MEDIACART.webp",
+    alt: "Facciata del negozio MEDIA Cart in Viale Sarca 163, Milano Bicocca",
+  },
+  {
+    src: "/assets/Slider-hero-002.jpg",
+    alt: "Interno MEDIA Cart, stampa e cartoleria a Milano Bicocca",
+  },
+  {
+    src: "/assets/Slider-hero-003.jpg",
+    alt: "Stampa digitale e materiali in negozio MEDIA Cart",
+  },
+  {
+    src: "/assets/Slider-hero-004.jpg",
+    alt: "Servizi MEDIA Cart per studenti, privati e aziende",
+  },
+];
+---
+
+<Base
+  title="MEDIA Cart | Stampa e Cartoleria Milano Biccoca"
+  description="Cartoleria e tipografia digitale a Milano Biccoca. Stampa tesi, grande formato, piccolo formato e supporto grafico. Chiedi il tuo preventivo."
+  path="/"
+>
+  <section class="section hero" aria-labelledby="hero-heading">
+    <div class="container hero-inner">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <h1 id="hero-heading">
+            <span class="hero-accent">Cartoleria</span> e Tipografia a
+            <span class="hero-accent">Milano Biccoca</span> per studenti, privati e aziende
+          </h1>
+          <p class="hero-lead">
+            In negozio a Viale Sarca 163 trovi un team rapido, preciso e disponibile.
+            Per tempi e costi, contattaci su WhatsApp o telefono e richiedi un preventivo.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="/contatti">Chiedi preventivo</a>
+            <a
+              class="btn btn-outline hero-btn-wa"
+              href="https://wa.me/393515544449"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                class="hero-wa-ico"
+                width="20"
+                height="20"
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  fill="#25D366"
+                  d="M16 3C8.82 3 3 8.82 3 16c0 2.52.72 4.96 2.08 7.06L3 29l6.13-2.02A12.93 12.93 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3z"
+                />
+                <path
+                  fill="#fff"
+                  d="M23.6 19.27c-.33-.17-1.94-.96-2.24-1.07-.3-.11-.52-.17-.74.17-.22.33-.85 1.07-1.04 1.29-.19.22-.39.25-.72.08-.33-.17-1.4-.52-2.67-1.65-.98-.87-1.64-1.95-1.83-2.28-.19-.33-.02-.5.14-.66.15-.15.33-.39.5-.58.17-.19.22-.33.33-.55.11-.22.06-.41-.03-.58-.08-.17-.74-1.78-1.01-2.44-.26-.62-.53-.54-.74-.55h-.63c-.22 0-.58.08-.88.41-.3.33-1.16 1.13-1.16 2.76 0 1.62 1.19 3.19 1.35 3.41.17.22 2.33 3.56 5.65 5 .79.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 1.94-.79 2.21-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.63-.38z"
+                />
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+          <p class="hero-trust">
+            <span class="hero-trust-icons" aria-hidden="true">
+              <svg class="hero-google-ico" width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                />
+              </svg>
+              <span class="hero-stars" aria-hidden="true">★★★★★</span>
+            </span>
+            <span class="hero-trust-text">Google 4,9/5 su 363 recensioni</span>
+          </p>
+        </div>
+        <aside class="card highlight hero-carousel-aside" aria-label="Anteprima servizi in negozio">
+          <HeroServiceCarousel slides={heroSlides} />
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Servizi in evidenza</h2>
+      <p class="lead">
+        Soluzioni di stampa e cartoleria con attenzione a qualita, puntualita e supporto cliente.
+      </p>
+      <div class="grid-3">
+        {serviziEvidenza.map((servizio) => (
+          <ServizioCard
+            titolo={servizio.titolo}
+            descrizione={servizio.descrizione}
+            href={servizio.href}
+            immagineSrc={servizio.immagineSrc}
+            immagineAlt={servizio.immagineAlt}
+          />
+        ))}
+      </div>
+      <p class="home-catalog-link">
+        <a class="btn btn-outline" href="/servizi">Vedi catalogo completo dei servizi</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section dove-section">
+    <div class="container dove-wrap cta-band">
+      <div class="dove-grid">
+        <div class="dove-copy">
+          <h2>Dove siamo</h2>
+          <p class="lead dove-lead">
+            Siamo in <strong>Viale Sarca 163, 20126 Milano MI</strong>, in zona Biccoca.
+            Servizio locale in negozio, con assistenza diretta.
+          </p>
+          <p class="dove-actions">
+            <a class="btn btn-outline" href="https://maps.app.goo.gl/7gMguGpeDLa3ozq37" target="_blank" rel="noopener noreferrer">
+              Apri su Google Maps
+            </a>
+          </p>
+        </div>
+        <div class="dove-map">
+          <iframe
+            title="Mappa: MEDIA Cart, Viale Sarca 163, Milano"
+            src="https://www.google.com/maps?q=Viale+Sarca+163,+20126+Milano+MI&output=embed"
+            width="600"
+            height="450"
+            style="border:0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Partner</h2>
+      <p class="lead">Collaboriamo con partner di riferimento nel settore stampa.</p>
+      <div class="grid-3">
+        <article class="card">
+          <div class="logo-wrap">
+            <img
+              src="/images/Stampelowcost-Logopng.png"
+              alt="Logo StampeLowCost"
+              loading="lazy"
+            />
+          </div>
+          <h3>StampeLowCost</h3>
+          <p class="muted">Partner principale per servizi complementari.</p>
+          <p><a href="https://print.stampelowcost.com/" target="_blank" rel="noopener noreferrer">Visita partner</a></p>
+        </article>
+        <article class="card">
+          <div class="logo-wrap">
+            <img src="/images/logo-mediaprint-centrostampa.svg" alt="Logo Media Print Centro Stampa" loading="lazy" />
+          </div>
+          <h3>Centrostampa</h3>
+          <p class="muted">Partner operativo nello stesso ecosistema aziendale.</p>
+          <p><a href="https://centrostampa.srl/" target="_blank" rel="noopener noreferrer">Visita partner</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: clamp(40px, 6vw, 72px);
+    padding-bottom: clamp(56px, 8vw, 88px);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 120% 80% at 15% -20%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 52%),
+      radial-gradient(ellipse 90% 70% at 95% 10%, color-mix(in srgb, var(--color-secondary) 7%, transparent), transparent 48%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 400px);
+    gap: clamp(28px, 4vw, 48px);
+    align-items: center;
+  }
+  .hero-main {
+    max-width: 38rem;
+  }
+  .eyebrow {
+    margin: 0 0 14px;
+    color: var(--color-secondary);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(2.05rem, 1.35rem + 2.4vw, 3.05rem);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+  .hero-accent {
+    color: var(--color-secondary);
+  }
+  .hero-lead {
+    margin: 1.35rem 0 0;
+    max-width: 42ch;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-muted);
+  }
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 1.85rem;
+    margin-bottom: 0;
+  }
+  .hero-btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-wa-ico {
+    flex-shrink: 0;
+    display: block;
+  }
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin: 1.75rem 0 0;
+    padding-top: 1.35rem;
+    max-width: 46ch;
+    border-top: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+  }
+  .hero-trust-icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-google-ico {
+    display: block;
+    flex-shrink: 0;
+  }
+  .hero-stars {
+    display: inline-block;
+    color: #fbbc04;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+  .hero-trust-text {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .highlight {
+    padding: clamp(14px, 2vw, 20px) clamp(14px, 2vw, 18px);
+    box-shadow: 0 12px 40px rgba(20, 35, 55, 0.07);
+  }
+  .hero-carousel-aside.card.highlight {
+    padding: 0;
+    overflow: hidden;
+  }
+  .dove-wrap {
+    padding: clamp(20px, 3vw, 28px);
+  }
+  .dove-grid {
+    display: flex;
+    gap: clamp(20px, 3vw, 36px);
+    align-items: stretch;
+  }
+  .dove-copy {
+    flex: 0 0 43%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: clamp(16px, 2.2vw, 24px);
+    min-height: 0;
+  }
+  .dove-map {
+    flex: 1 1 57%;
+  }
+  .dove-copy h2 {
+    margin: 0;
+  }
+  .dove-lead {
+    margin: 0 !important;
+  }
+  .dove-actions {
+    margin: 0;
+  }
+  .dove-map {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    min-height: 260px;
+  }
+  .dove-map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 270px;
+  }
+  .logo-wrap {
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: #fff;
+    min-height: 84px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .logo-wrap img {
+    max-height: 54px;
+    width: auto;
+    object-fit: contain;
+  }
+  .home-catalog-link {
+    margin: 28px 0 0;
+    text-align: center;
+  }
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    .hero-main {
+      max-width: none;
+    }
+    .hero-lead,
+    .hero-trust {
+      max-width: none;
+    }
+    .dove-grid {
+      flex-direction: column;
+    }
+    .dove-copy {
+      justify-content: flex-start;
+      gap: 18px;
+    }
+    .dove-map iframe {
+      min-height: 240px;
+    }
+  }
+</style>

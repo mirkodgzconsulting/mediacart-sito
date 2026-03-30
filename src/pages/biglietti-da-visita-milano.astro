@@ -1,0 +1,77 @@
+---
+import Base from "../layouts/Base.astro";
+import LandingBreadcrumb from "../components/LandingBreadcrumb.astro";
+---
+
+<Base
+  title="Biglietti da Visita Milano Biccoca | Stampa MEDIA Cart"
+  description="Stampa biglietti da visita a Milano: cartoncino, PVC, plastificati, angoli tondi, pieghevoli. Tipografia in Viale Sarca 163, zona Biccoca."
+  path="/biglietti-da-visita-milano"
+>
+  <LandingBreadcrumb
+    items={[
+      { label: "Home", href: "/" },
+      { label: "Servizi", href: "/servizi" },
+      { label: "Biglietti da visita Milano" }
+    ]}
+  />
+
+  <section class="section landing-hero">
+    <div class="container">
+      <h1>Biglietti da visita a Milano</h1>
+      <p class="lead">
+        I <strong>biglietti da visita</strong> restano uno strumento immediato per presentarsi in studio, in negozio o a un
+        evento. Da MEDIA Cart, in <strong>zona Biccoca</strong> (Viale Sarca 163), stampiamo biglietti su diversi supporti e
+        con finiture professionali: dal classico cartoncino alle soluzioni piu resistenti come PVC o plastificazione.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container card">
+      <h2>Tipologie e finiture disponibili</h2>
+      <p>
+        Possiamo realizzare biglietti in formato standard o personalizzato, con orientamento orizzontale o verticale, a seconda
+        della tua grafica. Tra le opzioni piu richieste:
+      </p>
+      <ul class="landing-list">
+        <li>Cartoncino con stampa fronte o fronte/retro</li>
+        <li>Angoli arrotondati, biglietti quadrati o formato pieghevole</li>
+        <li>Versioni spessorate o effetto &quot;lusso&quot; per brand e professionisti</li>
+        <li>Biglietti in PVC per durata e resistenza</li>
+        <li>Plastificazione lucida o opaca</li>
+      </ul>
+      <p>
+        Se hai gia il file pronto per la stampa, lo verifichiamo insieme; se ti serve supporto grafico, possiamo indirizzarti
+        verso un impaginato coerente con il supporto scelto.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container card">
+      <h2>Per chi e pensato il servizio</h2>
+      <p>
+        Liberi professionisti, negozi, studi medici e legali, creativi e startup a <strong>Milano</strong> e in particolare in
+        area <strong>Biccoca</strong> trovano da noi tempi di risposta rapidi e un team che segue il lavoro fino al ritiro in
+        negozio. Nessuna spedizione obbligatoria: ritiri il pacco quando e pronto.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <h2>Preventivo biglietti da visita</h2>
+      <p class="lead">
+        Scrivici con quantita, formato desiderato e se serve stampa solo fronte o fronte/retro. Allega il file se gia disponibile.
+      </p>
+      <p class="landing-actions">
+        <a class="btn btn-primary" href="/contatti">Richiedi preventivo</a>
+        <a class="btn btn-outline" href="https://wa.me/393515544449" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
+      <p class="muted landing-more">
+        Tutti i prodotti <a href="/servizi#piccolo-formato">piccolo formato nel catalogo</a>.
+      </p>
+    </div>
+  </section>
+</Base>
