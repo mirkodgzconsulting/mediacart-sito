@@ -52,7 +52,7 @@ const slides: HeroSlide[] =
                   draggable="false"
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
-                  fetchpriority={i === 0 ? "high" : undefined}
+                  {...(i === 0 ? { fetchpriority: "high" } : {})}
                 />
               ) : (
                 <div class="carousel-placeholder">
