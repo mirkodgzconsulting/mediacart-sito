@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "optimize:images": "node scripts/optimize-assets.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
@@ -14,5 +15,8 @@
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
     "@lucide/astro": "^1.7.0",
     "astro": "^5.13.4"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

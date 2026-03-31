@@ -28,6 +28,12 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   background: var(--color-bg);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  min-width: 0;
 }
 
 body.nav-open {

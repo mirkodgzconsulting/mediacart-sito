@@ -23,3 +23,6 @@ Thumbs.db
 # Debug
 npm-debug.log*
 pnpm-debug.log*
+
+# Image optimizer temp files
+*.opt.tmp

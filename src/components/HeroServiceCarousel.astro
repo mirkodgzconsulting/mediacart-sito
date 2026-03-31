@@ -10,6 +10,9 @@
 export interface HeroSlide {
   src?: string;
   alt?: string;
+  /** Dimensioni intrinseche (Lighthouse) */
+  width?: number;
+  height?: number;
   /** Testo sul placeholder (opzionale) */
   label?: string;
 }
@@ -52,6 +55,9 @@ const slides: HeroSlide[] =
                   draggable="false"
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
+                  {...(slide.width != null && slide.height != null
+                    ? { width: slide.width, height: slide.height }
+                    : {})}
                   {...(i === 0 ? { fetchpriority: "high" } : {})}
                 />
               ) : (
@@ -221,11 +227,13 @@ const slides: HeroSlide[] =
 <style>
   .hero-service-carousel {
     margin-bottom: 0.7rem;
+    min-width: 0;
   }
   .carousel-shell {
     position: relative;
     display: block;
     width: 100%;
+    min-width: 0;
     /* Un solo alto para todas le slide: evita spazio bianco sotto la 1ª e bande sulle altre */
     aspect-ratio: 4 / 3;
   }

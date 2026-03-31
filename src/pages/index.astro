@@ -6,20 +6,28 @@ import { serviziEvidenza } from "../data/servizi-evidenza";
 
 const heroSlides = [
   {
-    src: "/assets/Foto-Fronte-Negozio-MEDIACART.webp",
+    src: "/assets/Foto-Fronte-Negozio-MEDIACART-800.webp",
     alt: "Facciata del negozio MEDIA Cart in Viale Sarca 163, Milano Bicocca",
+    width: 755,
+    height: 633,
   },
   {
     src: "/assets/Slider-hero-002.jpg",
     alt: "Interno MEDIA Cart, stampa e cartoleria a Milano Bicocca",
+    width: 300,
+    height: 300,
   },
   {
     src: "/assets/Slider-hero-003.jpg",
     alt: "Stampa digitale e materiali in negozio MEDIA Cart",
+    width: 300,
+    height: 300,
   },
   {
     src: "/assets/Slider-hero-004.jpg",
     alt: "Servizi MEDIA Cart per studenti, privati e aziende",
+    width: 300,
+    height: 300,
   },
 ];
 ---
@@ -115,6 +123,8 @@ const heroSlides = [
             href={servizio.href}
             immagineSrc={servizio.immagineSrc}
             immagineAlt={servizio.immagineAlt}
+            immagineWidth={servizio.immagineWidth}
+            immagineHeight={servizio.immagineHeight}
           />
         ))}
       </div>
@@ -207,9 +217,13 @@ const heroSlides = [
   }
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 400px);
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, min(400px, 100%));
     gap: clamp(28px, 4vw, 48px);
     align-items: center;
+    min-width: 0;
+  }
+  .hero-grid > * {
+    min-width: 0;
   }
   .hero-main {
     max-width: 38rem;

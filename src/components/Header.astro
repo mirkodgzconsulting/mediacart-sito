@@ -228,8 +228,9 @@ const megaMenuMobile = [...megaMenuCol1, ...megaMenuCol2];
     /* Sin margen bajo el link: el hueco cerraba el :hover antes de llegar al panel */
     top: 100%;
     z-index: 250;
-    min-width: 560px;
-    max-width: min(640px, 92vw);
+    /* Evita che il pannello allarghi la pagina oltre la viewport (scroll orizzontale) */
+    width: min(640px, calc(100vw - 32px));
+    max-width: min(640px, calc(100vw - 32px));
     padding: 12px 14px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);

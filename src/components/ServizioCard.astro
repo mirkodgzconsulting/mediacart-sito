@@ -5,10 +5,21 @@ interface Props {
   href?: string;
   immagineSrc?: string;
   immagineAlt?: string;
+  immagineWidth?: number;
+  immagineHeight?: number;
   /** Default: cover (home). Usa "contain" per mostrare la foto intera senza ritagli. */
   immagineObjectFit?: "cover" | "contain";
 }
-const { titolo, descrizione, href, immagineSrc, immagineAlt, immagineObjectFit = "cover" } = Astro.props;
+const {
+  titolo,
+  descrizione,
+  href,
+  immagineSrc,
+  immagineAlt,
+  immagineWidth = 640,
+  immagineHeight = 400,
+  immagineObjectFit = "cover",
+} = Astro.props;
 const isContain = immagineObjectFit === "contain";
 ---
 
@@ -16,7 +27,14 @@ const isContain = immagineObjectFit === "contain";
   {
     immagineSrc && (
       <div class:list={["servizio-card-visual", { "servizio-card-visual--contain": isContain }]}>
-        <img src={immagineSrc} alt={immagineAlt ?? titolo} width={640} height={400} loading="lazy" decoding="async" />
+        <img
+          src={immagineSrc}
+          alt={immagineAlt ?? titolo}
+          width={immagineWidth}
+          height={immagineHeight}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     )
   }
