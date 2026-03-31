@@ -27,14 +27,27 @@ const isContain = immagineObjectFit === "contain";
   {
     immagineSrc && (
       <div class:list={["servizio-card-visual", { "servizio-card-visual--contain": isContain }]}>
-        <img
-          src={immagineSrc}
-          alt={immagineAlt ?? titolo}
-          width={immagineWidth}
-          height={immagineHeight}
-          loading="lazy"
-          decoding="async"
-        />
+        {href ? (
+          <a href={href} class="servizio-card-visual-link" aria-label={`Vai a ${titolo}`}>
+            <img
+              src={immagineSrc}
+              alt={immagineAlt ?? titolo}
+              width={immagineWidth}
+              height={immagineHeight}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        ) : (
+          <img
+            src={immagineSrc}
+            alt={immagineAlt ?? titolo}
+            width={immagineWidth}
+            height={immagineHeight}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
       </div>
     )
   }
@@ -58,6 +71,9 @@ const isContain = immagineObjectFit === "contain";
     margin: 0;
     border-bottom: 1px solid var(--color-border);
     background: color-mix(in srgb, var(--color-border) 25%, var(--color-surface));
+  }
+  .servizio-card-visual-link {
+    display: block;
   }
   .servizio-card-visual img {
     display: block;
