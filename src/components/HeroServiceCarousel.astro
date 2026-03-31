@@ -13,6 +13,9 @@ export interface HeroSlide {
   /** Dimensioni intrinseche (Lighthouse) */
   width?: number;
   height?: number;
+  /** Attributi responsive opzionali */
+  srcSet?: string;
+  sizes?: string;
   /** Testo sul placeholder (opzionale) */
   label?: string;
 }
@@ -55,6 +58,8 @@ const slides: HeroSlide[] =
                   draggable="false"
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding="async"
+                  {...(slide.srcSet ? { srcset: slide.srcSet } : {})}
+                  {...(slide.sizes ? { sizes: slide.sizes } : {})}
                   {...(slide.width != null && slide.height != null
                     ? { width: slide.width, height: slide.height }
                     : {})}

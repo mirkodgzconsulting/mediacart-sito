@@ -34,19 +34,40 @@ async function jpgToCardWebp(baseName) {
 
 async function optimizeHeroStorefront() {
   const src = join(assets, "Foto-Fronte-Negozio-MEDIACART.webp");
-  const out = join(assets, "Foto-Fronte-Negozio-MEDIACART-800.webp");
+  const outDesktop = join(assets, "Foto-Fronte-Negozio-MEDIACART-800.webp");
+  const outMobile = join(assets, "Foto-Fronte-Negozio-MEDIACART-560.webp");
   if (!existsSync(src)) {
     console.warn("Skip storefront:", src);
-    return { w: 800, h: 600, src: "/assets/Foto-Fronte-Negozio-MEDIACART.webp" };
+    return {
+      w: 800,
+      h: 600,
+      src: "/assets/Foto-Fronte-Negozio-MEDIACART.webp",
+      srcSet: "/assets/Foto-Fronte-Negozio-MEDIACART.webp 800w",
+      sizes: "(max-width: 900px) 92vw, 400px",
+    };
   }
   await sharp(src)
     .rotate()
     .resize(800, 633, { fit: "inside", withoutEnlargement: true })
     .webp({ quality: 80, effort: 6 })
-    .toFile(out);
-  const meta = await sharp(out).metadata();
+    .toFile(outDesktop);
+  await sharp(src)
+    .rotate()
+    .resize(560, 443, { fit: "inside", withoutEnlargement: true })
+    .webp({ quality: 72, effort: 6 })
+    .toFile(outMobile);
+  const meta = await sharp(outDesktop).metadata();
+  const mobileMeta = await sharp(outMobile).metadata();
   console.log("OK Foto-Fronte-Negozio-MEDIACART-800.webp", meta.width, "x", meta.height);
-  return { w: meta.width, h: meta.height, src: "/assets/Foto-Fronte-Negozio-MEDIACART-800.webp" };
+  console.log("OK Foto-Fronte-Negozio-MEDIACART-560.webp", mobileMeta.width, "x", mobileMeta.height);
+  return {
+    w: meta.width,
+    h: meta.height,
+    src: "/assets/Foto-Fronte-Negozio-MEDIACART-800.webp",
+    srcSet:
+      "/assets/Foto-Fronte-Negozio-MEDIACART-560.webp 560w, /assets/Foto-Fronte-Negozio-MEDIACART-800.webp 800w",
+    sizes: "(max-width: 900px) 92vw, 400px",
+  };
 }
 
 async function tesiMeta() {

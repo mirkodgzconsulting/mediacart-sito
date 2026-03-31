@@ -1,5 +1,4 @@
 @import "@fontsource-variable/inter/index.css";
-@import "@fontsource-variable/plus-jakarta-sans/index.css";
 
 :root {
   --color-primary: #00aeef;
@@ -11,7 +10,7 @@
   --color-border: #d9e6f4;
   --shadow-soft: 0 8px 30px rgba(20, 35, 55, 0.08);
   --radius: 14px;
-  --font-heading: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-body: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -183,33 +182,3 @@ img {
   color: var(--color-primary);
 }
 
-/* Transizioni pagina (Astro View Transitions) */
-::view-transition-old(root) {
-  animation: page-fade-out 220ms ease both;
-}
-
-::view-transition-new(root) {
-  animation: page-fade-in 280ms ease both;
-}
-
-@keyframes page-fade-out {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-}
-
-@keyframes page-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}

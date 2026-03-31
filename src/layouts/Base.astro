@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import { ViewTransitions } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CTAStickyMobile from "../components/CTAStickyMobile.astro";
@@ -11,9 +10,21 @@ interface Props {
   path?: string;
   /** Pagina errore (404): noindex, senza canonical / JSON-LD */
   noindex?: boolean;
+  /** Preload risorsa LCP (home hero) */
+  preloadImageSrc?: string;
+  preloadImageSrcSet?: string;
+  preloadImageSizes?: string;
 }
 
-const { title, description, path = "/", noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  path = "/",
+  noindex = false,
+  preloadImageSrc,
+  preloadImageSrcSet,
+  preloadImageSizes,
+} = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://mediacart.it";
 const canonicalUrl = new URL(path, siteUrl + "/").toString();
 /** Immagine condivisione social (Open Graph / Twitter) */
@@ -94,7 +105,6 @@ const structuredDataJsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <ViewTransitions />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta
@@ -130,6 +140,18 @@ const structuredDataJsonLd = {
     <meta name="theme-color" content="#00AEEF" />
     <link rel="icon" type="image/jpeg" href="/images/favicon-mediacart.jpg" />
     <link rel="apple-touch-icon" href="/images/favicon-mediacart.jpg" />
+    {
+      preloadImageSrc && (
+        <link
+          rel="preload"
+          as="image"
+          href={preloadImageSrc}
+          {...(preloadImageSrcSet ? { imagesrcset: preloadImageSrcSet } : {})}
+          {...(preloadImageSizes ? { imagesizes: preloadImageSizes } : {})}
+          fetchpriority="high"
+        />
+      )
+    }
     {!noindex && <script type="application/ld+json" set:html={JSON.stringify(structuredDataJsonLd)} />}
   </head>
   <body>
