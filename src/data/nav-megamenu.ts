@@ -8,9 +8,9 @@ export const megaMenuCol1: MegaItem[] = [
     description: "Tutte le categorie: piccolo formato, packaging, grande formato e altro."
   },
   {
-    href: "/stampa-tesi-milano-biccoca",
+    href: "/stampa-tesi-milano-bicocca",
     title: "Stampa tesi di laurea",
-    description: "Rilegatura e finiture per studenti vicino alla Biccoca, ritiro in negozio."
+    description: "Rilegatura e finiture per studenti vicino alla Bicocca, ritiro in negozio."
   },
   {
     href: "/servizi#piccolo-formato",

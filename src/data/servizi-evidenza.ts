@@ -14,7 +14,7 @@ export const serviziEvidenza: ServizioEvidenza[] = [
   {
     titolo: "Stampa Tesi di Laurea",
     descrizione:
-      "Servizio dedicato agli studenti Biccoca con stampa e rilegatura professionale, anche per urgenze.",
+      "Servizio dedicato agli studenti Bicocca con stampa e rilegatura professionale, anche per urgenze.",
     href: "/servizi#stampa-tesi",
     immagineSrc: "/assets/Tesi-001.avif",
     immagineAlt: "Stampa e rilegatura tesi di laurea",
